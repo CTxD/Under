@@ -3,6 +3,9 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+
+    public bool isFlipped = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -24,12 +27,25 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //Move left
-        if (Input.GetKey("a") || Input.GetKey("left")) 
-            this.transform.Translate(Vector2.left * Time.deltaTime);
+        if (Input.GetKey("a") || Input.GetKey("left")) {
+            isFlipped = false;
+        this.transform.Translate(Vector2.left * Time.deltaTime);
+        Quaternion tempVect = this.transform.rotation;
+        tempVect.y = 0;
+        this.transform.rotation = tempVect;
+            this.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+        }
 
         //move right
-        if (Input.GetKey("d") || Input.GetKey("right"))
-            this.transform.Translate(Vector2.right * Time.deltaTime);
+        if (Input.GetKey("d") || Input.GetKey("right")) {
+            isFlipped = true;
+
+            Quaternion minerRot = this.transform.rotation;
+            minerRot.y = 180;
+            this.transform.rotation = minerRot;
+            this.transform.Translate(Vector2.left * Time.deltaTime);
+            this.transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+        }
 
         //Jump
         if (Input.GetKeyDown("space")) {

@@ -15,6 +15,8 @@ public class Mining : MonoBehaviour {
             Vector2 convertedMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 clickDirection = convertedMousePosition - (Vector2)this.transform.GetChild(0).position;
             angle = (Mathf.Atan2(clickDirection.y, clickDirection.x) * Mathf.Rad2Deg);
+            if (this.GetComponent<PlayerController>().isFlipped)
+                angle += 180;
 
             transform.GetChild(0).rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
@@ -36,25 +38,28 @@ public class Mining : MonoBehaviour {
     }
 
     IEnumerator Mine() {
+        int moveamount = -10;
+        if (this.GetComponent<PlayerController>().isFlipped)
+            moveamount *= -1;
         animationIsRunning = true;
         yield return new WaitForSeconds(0.02f);
-        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, -10);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
         yield return new WaitForSeconds(0.02f);
-        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, -10);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
         yield return new WaitForSeconds(0.02f);
-        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, -10);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
         yield return new WaitForSeconds(0.02f);
-        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, -10);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
         yield return new WaitForSeconds(0.02f);
-        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, -10);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
         yield return new WaitForSeconds(0.02f);
-        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, -10);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
         yield return new WaitForSeconds(0.02f);
-        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, -10);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
         yield return new WaitForSeconds(0.02f);
-        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, -10);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
         yield return new WaitForSeconds(0.02f);
-        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, -10);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
         animationIsRunning = false;
     }
 
