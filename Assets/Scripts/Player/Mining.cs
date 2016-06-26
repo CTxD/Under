@@ -27,15 +27,6 @@ public class Mining : MonoBehaviour {
                 }
                 else { 
                     hit.collider.gameObject.GetComponent<BlockProperties>().health--;
-                    EdgeCollider2D EC2D = hit.collider.transform.GetComponent<EdgeCollider2D>();
-                    Vector2[] points = EC2D.points;
-                    Vector2 midWay = (points[0] - points[1]);
-                    Debug.DrawRay(transform.position, EC2D.points[0], Color.blue, 5);
-                    Debug.DrawRay(transform.position, points[1], Color.blue, 5);
-                    EdgeCollider2D temp = EC2D.gameObject.AddComponent<EdgeCollider2D>();
-                    temp.points = new Vector2[] {points[0], midWay };
-                    EdgeCollider2D temp2 = EC2D.gameObject.AddComponent<EdgeCollider2D>();
-                    temp.points = new Vector2[] { midWay, points[1] };
                 }
             }
             StartCoroutine(Mine());
