@@ -1,14 +1,33 @@
-# Ignore the following files
-# --------------------------
-# Unity3D specific
+##################
+# Unity ignores:
 #
-**/Library/*
-**/Temp/*
-**/*.csproj
-**/*.unityproj
-**/*.sln
-**/*.userprefs
-**/*.pidb
-
-# include meta files
-!*.*.meta
+# !!! WARNING !!!
+#
+# … you MUST convert Unity to using Metafiles *before* you start using this
+#  .gitignore file, or you WILL lose data!
+#
+ 
+# OS X only:
+.DS_Store
+*.swp
+*.Trashes
+ 
+# All platforms:
+Library
+Temp
+*.csproj
+*.pidb
+*.unityproj
+*.sln
+*.userprefs
+basename.exe.stackdump
+obj/
+*.suo
+Assets/Packages/Standard Assets/
+Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll
+Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll
+Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll
+Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll.meta
+Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Messaging.dll.meta
+Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll.meta
+ProjectSettings/ProjectVersion.txt
