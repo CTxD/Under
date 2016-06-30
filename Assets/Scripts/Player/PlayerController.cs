@@ -3,7 +3,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-
+    private bool animationIsRunning = false;
+    public LayerMask toCast;
     public bool isFlipped = false;
 
 	// Use this for initialization
@@ -52,5 +53,64 @@ public class PlayerController : MonoBehaviour {
             Debug.Log(isGrounded(this.gameObject));
             Jump();
         }
+
+
+        if (Input.GetMouseButton(0) && !animationIsRunning) {
+            StartCoroutine(Mine());
+
+
+        }
+
     }
+
+
+    IEnumerator Mine() {
+
+
+        float angle;
+        Vector2 convertedMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 clickDirection = convertedMousePosition - (Vector2)this.transform.GetChild(0).position;
+        angle = (Mathf.Atan2(clickDirection.y, clickDirection.x) * Mathf.Rad2Deg);
+        if (this.GetComponent<PlayerController>().isFlipped)
+            angle += 180;
+
+        transform.GetChild(0).rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        Debug.DrawRay(this.transform.GetChild(0).position, clickDirection.normalized * 0.4f);
+
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.GetChild(0).position, clickDirection.normalized, 0.4f, toCast);
+        if (hit) {
+            if (hit.collider.gameObject.GetComponent<BlockProperties>().health <= 0) {
+                Destroy(hit.collider.gameObject);
+            }
+            else {
+                hit.collider.gameObject.GetComponent<BlockProperties>().health--;
+            }
+        }
+
+        int moveamount = -10;
+        if (this.GetComponent<PlayerController>().isFlipped)
+            moveamount *= -1;
+        animationIsRunning = true;
+        yield return new WaitForSeconds(0.02f);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
+        yield return new WaitForSeconds(0.02f);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
+        yield return new WaitForSeconds(0.02f);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
+        yield return new WaitForSeconds(0.02f);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
+        yield return new WaitForSeconds(0.02f);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
+        yield return new WaitForSeconds(0.02f);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
+        yield return new WaitForSeconds(0.02f);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
+        yield return new WaitForSeconds(0.02f);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
+        yield return new WaitForSeconds(0.02f);
+        transform.GetChild(0).rotation *= Quaternion.Euler(0, 0, moveamount);
+        animationIsRunning = false;
+    }
+
 }
